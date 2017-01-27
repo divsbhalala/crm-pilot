@@ -34,7 +34,7 @@
         gettextCatalog.setCurrentLanguage($scope.locale.lang);
       };
 
-      $scope.appName = 'LoopBack Admin';
+      $scope.appName = 'CRM Pilot';
       $scope.apiUrl = CoreService.env.apiUrl;
       $scope.appTheme = 'skin-blue';
       $scope.appThemes = [
