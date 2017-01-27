@@ -54,43 +54,7 @@
     "$promise": {},
     "$resolved": true
   },
-  "Page": {
-    "dataSource": "mongoDb",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "Note": {
-    "dataSource": "mongoDb",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "Post": {
-    "dataSource": "mongoDb",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
   "Setting": {
-    "dataSource": "mongoDb",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "Product": {
-    "dataSource": "mongoDb",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "Category": {
-    "dataSource": "mongoDb",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "Event": {
     "dataSource": "mongoDb",
     "public": true,
     "$promise": {},
@@ -103,12 +67,6 @@
     "$resolved": true
   },
   "user": {
-    "dataSource": "mongoDb",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "Meta": {
     "dataSource": "mongoDb",
     "public": true,
     "$promise": {},

@@ -40,7 +40,7 @@ module.exports = function(app) {
       }]
     }];
 
-    roles.forEach(function(role) {
+    /*roles.forEach(function(role) {
       Role.findOrCreate(
         {where: {name: role.name}}, // find
         {name: role.name}, // create
@@ -72,7 +72,7 @@ module.exports = function(app) {
               });
           });
         });
-    });
+    });*/
     return users;
   }
 
