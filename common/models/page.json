@@ -2,6 +2,11 @@
   "name": "Page",
   "plural": "pages",
   "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
   "properties": {
     "id": {
       "type": "string",

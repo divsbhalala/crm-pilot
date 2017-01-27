@@ -2,6 +2,11 @@
   "name": "Note",
   "plural": "notes",
   "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
   "properties": {
     "id": {
       "type": "id"

@@ -9,9 +9,9 @@
   },
   "mongoDb": {
     "host": "localhost",
-    "name": "mongoDb",
-    "connector": "mongodb",
     "database": "crm",
-    "password": ""
+    "password": "",
+    "name": "mongoDb",
+    "connector": "mongodb"
   }
 }

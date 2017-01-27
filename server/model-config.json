@@ -19,16 +19,22 @@
     "public": false
   },
   "accessToken": {
-    "dataSource": "db",
-    "public": true
+    "dataSource": "mongoDb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   },
   "userCredential": {
-    "dataSource": "db",
-    "public": true
+    "dataSource": "mongoDb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   },
   "userIdentity": {
-    "dataSource": "db",
-    "public": true
+    "dataSource": "mongoDb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   },
   "ACL": {
     "dataSource": "db",
@@ -43,47 +49,69 @@
     "public": true
   },
   "AppModel": {
-    "dataSource": "db",
-    "public": false
+    "dataSource": "mongoDb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   },
   "Page": {
-    "dataSource": "db",
-    "public": true
+    "dataSource": "mongoDb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   },
   "Note": {
-    "dataSource": "db",
-    "public": true
+    "dataSource": "mongoDb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   },
   "Post": {
-    "dataSource": "db",
-    "public": true
+    "dataSource": "mongoDb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   },
   "Setting": {
-    "dataSource": "db",
-    "public": true
+    "dataSource": "mongoDb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   },
   "Product": {
-    "dataSource": "db",
-    "public": true
+    "dataSource": "mongoDb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   },
   "Category": {
-    "dataSource": "db",
-    "public": true
+    "dataSource": "mongoDb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   },
   "Event": {
-    "dataSource": "db",
-    "public": true
+    "dataSource": "mongoDb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   },
   "AuthProvider": {
-    "dataSource": "db",
-    "public": true
+    "dataSource": "mongoDb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   },
   "user": {
-    "dataSource": "db",
-    "public": true
+    "dataSource": "mongoDb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   },
   "Meta": {
-    "dataSource": "db",
-    "public": true
+    "dataSource": "mongoDb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   }
 }

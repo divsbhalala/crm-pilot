@@ -2,6 +2,11 @@
   "name": "Post",
   "plural": "posts",
   "base": "AppModel",
+  "strict": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
   "properties": {
     "title": {
       "type": "string",

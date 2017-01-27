@@ -2,6 +2,11 @@
   "name": "Setting",
   "plural": "settings",
   "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
   "properties": {
     "key": {
       "type": "string",

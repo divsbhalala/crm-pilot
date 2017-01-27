@@ -2,6 +2,11 @@
   "name": "Category",
   "plural": "categories",
   "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
   "properties": {
     "name": {
       "type": "string"
