@@ -1,0 +1,17 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "transient": {
+    "name": "transient",
+    "connector": "transient"
+  },
+  "mongoDb": {
+    "host": "localhost",
+    "name": "mongoDb",
+    "connector": "mongodb",
+    "database": "crm",
+    "password": ""
+  }
+}
