@@ -48,6 +48,9 @@
       "through": "RoleMapping"
     }
   },
+  "indexes": {
+    "fulltext" : [{ "email" : "text" },{ "lastName" : "text" },{ "firstName" : "text" }]
+  },
   "acls": [
     {
       "accessType": "*",

@@ -1,3 +1,5 @@
+var _ = require("lodash");
+
 module.exports = function (user) {
 
   user.validatesUniquenessOf('email');
@@ -31,8 +33,17 @@ module.exports = function (user) {
         next();
       });
     });
-
   });
+
+  user.observe('loaded', function (ctx, next) {
+    ctx.instance = _.map(ctx.instance, function (item, key) {
+      if (item && key === '__data') {
+       item.display_name=item.firstName + ' ' + item.lastName;
+      }
+    })
+    next();
+  });
+
   user.afterRemote('login', function (ctx, c, next) {
     console.log(ctx.result);
     console.log(ctx.result.user);

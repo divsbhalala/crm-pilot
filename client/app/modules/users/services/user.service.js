@@ -7,6 +7,13 @@
       this.find = function () {
         return User.find().$promise;
       };
+      this.findByWhere = function (where) {
+        return User.find({filter: where}).$promise;
+      };
+
+      this.count = function (where) {
+        return User.count({filter:where}).$promise;
+      };
 
       this.findById = function (id) {
         return User.findById({

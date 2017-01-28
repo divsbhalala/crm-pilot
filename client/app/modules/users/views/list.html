@@ -1,6 +1,10 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    Users
+    <span class="">
+    <input class="form-control" autofocus="autofocus" style="max-width: 15em; display: inline-block;"
+           ng-model="searchText" placeholder="search..." ng-keyup="getUsers()">
+      <label>{{(ctrl.totalUser).length}} users found</label>
+    </span>
     <span class="pull-right btn-group">
       <a href="" class="btn btn-xs btn-success" ui-sref="^.add()">
         <i class="fa fa-plus"></i>
@@ -9,7 +13,7 @@
   </div>
 
   <div class='list-group'>
-    <div ng-repeat="user in ctrl.users" class="list-group-item">
+    <div ng-repeat="user in ctrl.users | filter:searchText | orderBy: 'email'" class="list-group-item col-md-12">
       <span class="pull-right btn-group">
         <a class="btn btn-xs btn-default" ui-sref="app.users.edit({ id: user.id })">
           <i class="fa fa-pencil"></i>
@@ -18,13 +22,44 @@
           <i class="fa fa-trash-o"></i>
         </a>
       </span>
-      <h4>
-        <a href="" ui-sref="app.users.view({id: user.id})">{{user.firstName}} {{user.lastName}}</a>
-      </h4>
-      {{user.username}}
-      <span class="text-muted">{{user.email}}</span>
-      <span ng-repeat="role in user.roles" class="label label-default">{{role.name}}</span>
+      <div class="col-md-6">
+        <div>
+          <span>Display Name:</span>
+          <label>{{ user.display_name || user.firstName +' ' + user.lastName}}</label>
+        </div>
+        <div>
+          <span>Email:</span>
+          <label><a class="text-muted" editable-text="user.email">{{user.email}}</a></label>
+        </div>
+      </div>
 
+      <div class="col-md-6">
+        <div>
+          <span>First Name:</span>
+          <label><a class="text-muted" editable-text="user.firstName">{{user.firstName}}</a></label>
+        </div>
+        <div>
+          <span>Last Name:</span>
+          <label><a class="text-muted" editable-text="user.lastName">{{user.lastName}}</a></label>
+        </div>
+      </div>
+    </div>
+    <div class="list-group-item col-md-12">
+      <div class="pull-left col-md-4">Record {{ ctrl.offset-ctrl.limit}} to {{ctrl.offset}} of {{ctrl.totalUsers.count}}</div>
+
+      <div class="input-group pull-right col-md-3">
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-disabled="ctrl.currentPage == 1" ng-click="ctrl.getPrevUsers()">&lt;&lt; Prev</button>
+        </div>
+        <div class="input-group-btn" style="min-width: 75px;">
+          <input type="number" class="form-control" placeholder="Page" min="1" max="{{ctrl.totalPage}}"
+                 ng-model="ctrl.currentPage">
+        </div>
+        <div class="input-group-btn">
+          <button class="btn btn-primary" type="button" ng-disabled="ctrl.currentPage > ctrl.totalPage" ng-click="ctrl.getGoUser()">Go</button>
+          <button class="btn btn-default" type="button" ng-disabled="ctrl.currentPage == ctrl.totalPage" ng-click="ctrl.getUsers()">Next&gt;&gt;</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

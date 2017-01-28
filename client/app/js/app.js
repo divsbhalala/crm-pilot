@@ -38,12 +38,14 @@
       'angular-underscore/filters',
       'schemaForm',
       'ui.select',
+      'xeditable',
       'com.module.core',
       'com.module.settings',
       'com.module.users'
     ])
-    .run(function ($rootScope, $cookies, gettextCatalog) {
-
+    .run(function ($rootScope, $cookies, gettextCatalog, editableOptions) {
+      editableOptions.theme = 'bs3';
+      $rootScope.Math=Math;
       $rootScope.locales = {
         'de': {
           lang: 'de',
@@ -107,7 +109,7 @@
        */
       var ngModelAttrs = {};
 
-      function camelize (string) {
+      function camelize(string) {
         string = string.replace(/[\-_\s]+(.)?/g, function (match, chr) {
           return chr ? chr.toUpperCase() : '';
         });
@@ -170,6 +172,13 @@
           }
         }
       });
-    });
+    }).filter('range', function () {
+    return function (val, range) {
+      range = parseInt(range);
+      for (var i = 0; i < range; i++)
+        val.push(i);
+      return val;
+    };
+  });
 
 })();

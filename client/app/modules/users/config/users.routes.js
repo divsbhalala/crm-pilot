@@ -23,14 +23,55 @@
           url: '',
           templateUrl: 'modules/users/views/list.html',
           controllerAs: 'ctrl',
-          controller: function (users) {
-            console.log('users', users);
-            this.users = users;
+          controller: function (users, totalUsers, UserService) {
+            console.log('users', users, UserService);
+            var self=this;
+            self.totalUsers= totalUsers;
+            self.limit=2;
+            self.offset=0;
+            self.totalUser=0;
+            var countByWhere= function(where){
+              return UserService.count(where).then(function(data){
+                self.totalUsers=data;
+              });
+            };
+            var getUsers= function(){
+              if(self.searchText){
+                return UserService.findByWhere({"where":{ "$text": { "search": self.searchText } }});
+              }
+              else{
+                return UserService.find();
+              }
+            };
+            self.totalPage=Math.ceil(self.totalUsers.count/self.limit);
+            self.getUsers= function(){
+
+              self.currentPage = self.currentPage <= self.totalPage ? self.currentPage: self.totalPage;
+              getUsers().then(function(data){
+                self.totalUser=data;
+                self.users=data.splice(self.offset, self.limit);
+                self.offset+=self.limit;
+                self.currentPage=Math.ceil(self.offset/self.limit);
+              })
+            };
+            self.getUsers();
+            self.getGoUser=function(){
+              self.offset=self.limit*self.currentPage;
+              self.getUsers();
+            };
+            self.getPrevUsers=function(){
+              self.offset-=self.limit;
+              self.offset-=self.limit;
+              self.getUsers();
+            }
+
           },
           resolve: {
             users: function (UserService) {
-              console.log('users');
               return UserService.find();
+            },
+            totalUsers: function(UserService){
+              return UserService.count();
             }
           }
         })
@@ -39,11 +80,12 @@
           templateUrl: 'modules/users/views/form.html',
           controllerAs: 'ctrl',
           controller: function ($state, UserService, user) {
-            this.user = user;
-            this.formFields = UserService.getFormFields('add');
-            this.formOptions = {};
-            this.submit = function () {
-              UserService.upsert(this.user).then(function () {
+            var self=this;
+            self.user = user;
+            self.formFields = UserService.getFormFields('add');
+            self.formOptions = {};
+            self.submit = function () {
+              UserService.upsert(self.user).then(function () {
                 $state.go('^.list');
               }).catch(function (err) {
                 console.log(err);
@@ -61,11 +103,12 @@
           templateUrl: 'modules/users/views/form.html',
           controllerAs: 'ctrl',
           controller: function ($state, UserService, user) {
-            this.user = user;
-            this.formFields = UserService.getFormFields('edit');
-            this.formOptions = {};
-            this.submit = function () {
-              UserService.updateAttributes(this.user.id, this.user).then(function () {
+            var self=this;
+            self.user = user;
+            self.formFields = UserService.getFormFields('edit');
+            self.formOptions = {};
+            self.submit = function () {
+              UserService.updateAttributes(self.user.id, self.user).then(function () {
                 $state.go('^.list');
               });
             };
@@ -81,7 +124,8 @@
           templateUrl: 'modules/users/views/view.html',
           controllerAs: 'ctrl',
           controller: function (user) {
-            this.user = user;
+            var self=this;
+            self.user = user;
           },
           resolve: {
             user: function ($stateParams, UserService) {
@@ -105,11 +149,12 @@
           templateUrl: 'modules/users/views/profile.html',
           controllerAs: 'ctrl',
           controller: function ($state, UserService, user) {
-            this.user = user;
-            this.formFields = UserService.getFormFields('edit');
-            this.formOptions = {};
-            this.submit = function () {
-              UserService.upsert(this.user).then(function () {
+            var self=this;
+            self.user = user;
+            self.formFields = UserService.getFormFields('edit');
+            self.formOptions = {};
+            self.submit = function () {
+              UserService.updateAttributes(self.user.id, self.user).then(function () {
                 $state.go('^.profile');
               });
             };

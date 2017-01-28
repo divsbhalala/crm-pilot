@@ -20,19 +20,19 @@
   },
   "accessToken": {
     "dataSource": "mongoDb",
-    "public": true,
+    "public": false,
     "$promise": {},
     "$resolved": true
   },
   "userCredential": {
     "dataSource": "mongoDb",
-    "public": true,
+    "public": false,
     "$promise": {},
     "$resolved": true
   },
   "userIdentity": {
     "dataSource": "mongoDb",
-    "public": true,
+    "public": false,
     "$promise": {},
     "$resolved": true
   },
@@ -42,15 +42,15 @@
   },
   "RoleMapping": {
     "dataSource": "mongoDb",
-    "public": true
+    "public": false
   },
   "Role": {
     "dataSource": "mongoDb",
-    "public": true
+    "public": false
   },
   "AppModel": {
     "dataSource": "mongoDb",
-    "public": true,
+    "public": false,
     "$promise": {},
     "$resolved": true
   },
