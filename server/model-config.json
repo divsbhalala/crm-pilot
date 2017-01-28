@@ -41,11 +41,11 @@
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "mongoDb",
     "public": true
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "mongoDb",
     "public": true
   },
   "AppModel": {

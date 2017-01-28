@@ -65,7 +65,7 @@
             this.formFields = UserService.getFormFields('edit');
             this.formOptions = {};
             this.submit = function () {
-              UserService.upsert(this.user).then(function () {
+              UserService.updateAttributes(this.user.id, this.user).then(function () {
                 $state.go('^.list');
               });
             };

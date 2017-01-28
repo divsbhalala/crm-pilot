@@ -30,6 +30,22 @@
           }
         );
       };
+      this.updateAttributes = function (id, user) {
+        return User.prototype$updateAttributes({id: id}, user).$promise
+          .then(function () {
+            CoreService.toastSuccess(
+              gettextCatalog.getString('User saved'),
+              gettextCatalog.getString('Your user is safe with us!')
+            );
+          })
+          .catch(function (err) {
+            CoreService.toastError(
+              gettextCatalog.getString('Error saving user '),
+              gettextCatalog.getString('This user could no be saved: ' + err)
+            );
+          }
+        );
+      };
 
       this.delete = function (id, successCb, cancelCb) {
         CoreService.confirm(
@@ -58,19 +74,22 @@
       this.getFormFields = function (formType) {
         var form = [
           {
-            key: 'username',
-            type: 'input',
-            templateOptions: {
-              label: gettextCatalog.getString('Username'),
-              required: true
-            }
-          },
-          {
             key: 'email',
             type: 'input',
             templateOptions: {
               label: gettextCatalog.getString('Email'),
-              required: true
+              required: true,
+              type: 'email',
+              placeholder: 'Enter email',
+              attr: {
+                required: true,
+                ngMinlength: 4
+              },
+              msgs: {
+                required: gettextCatalog.getString('You need an email address'),
+                email: gettextCatalog.getString('Email address needs to be valid'),
+                valid: gettextCatalog.getString('Nice email address!')
+              }
             }
           },
           {
@@ -78,7 +97,7 @@
             type: 'input',
             templateOptions: {
               label: gettextCatalog.getString('First name'),
-              required: true
+              placeholder: 'Enter first name'
             }
           },
           {
@@ -86,7 +105,7 @@
             type: 'input',
             templateOptions: {
               label: gettextCatalog.getString('Last name'),
-              required: true
+              placeholder: 'Enter last name'
             }
           }
         ];
@@ -96,7 +115,16 @@
             type: 'input',
             templateOptions: {
               label: gettextCatalog.getString('Password'),
-              required: true
+              placeholder: 'Enter password',
+              required: true,
+              attr: {
+                ngMinlength: 8,
+                required: true
+              },
+              msgs: {
+                minlength: gettextCatalog.getString(
+                  'Needs to have at least 8 characters')
+              }
             }
           });
         }

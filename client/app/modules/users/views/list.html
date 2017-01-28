@@ -11,9 +11,6 @@
   <div class='list-group'>
     <div ng-repeat="user in ctrl.users" class="list-group-item">
       <span class="pull-right btn-group">
-        <a class="btn btn-xs btn-default" ui-sref="app.users.password({ id: user.id })">
-          <i class="fa fa-key"></i>
-        </a>
         <a class="btn btn-xs btn-default" ui-sref="app.users.edit({ id: user.id })">
           <i class="fa fa-pencil"></i>
         </a>

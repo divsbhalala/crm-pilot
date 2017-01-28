@@ -7,7 +7,23 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "required": true,
+      "index": true
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
   "validations": [],
   "relations": {
     "accessTokens": {
@@ -36,7 +52,7 @@
     {
       "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "admin",
+      "principalId": "$authenticated",
       "permission": "ALLOW"
     },
     {

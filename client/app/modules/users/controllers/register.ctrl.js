@@ -62,33 +62,19 @@
           email: gettextCatalog.getString('Email address needs to be valid'),
           valid: gettextCatalog.getString('Nice email address!')
         }
-      }, {
-        type: 'multiple',
-        fields: [{
-          label: '',
-          property: 'password',
-          placeholder: gettextCatalog.getString('Password'),
-          type: 'password',
-          attr: {
-            required: true,
-            ngMinlength: 6
-          }
-        }, {
-          label: '',
-          property: 'confirmPassword',
-          placeholder: gettextCatalog.getString('Confirm Password'),
-          type: 'password',
-          attr: {
-            confirmPassword: 'user.password',
-            required: true,
-            ngMinlength: 6
-          },
-          msgs: {
-            match: gettextCatalog.getString(
-              'Your passwords need to match')
-          }
-        }],
-        columns: 6
+      },
+      {
+        label: '',
+        property: 'password',
+        placeholder: gettextCatalog.getString('Password'),
+        type: 'password',
+        attr: {
+          required: true,
+          ngMinlength: 8
+        },
+        msgs: {
+          required: gettextCatalog.getString('You need an password')
+        }
       }];
 
       $scope.options = {
@@ -141,24 +127,24 @@
       };
     })
     .directive('confirmPassword',
-    function () {
-      return {
-        restrict: 'A',
-        require: 'ngModel',
-        link: function (scope, element, attrs, ngModel) {
-          var validate = function (viewValue) {
-            var password = scope.$eval(attrs.confirmPassword);
-            ngModel.$setValidity('match', ngModel.$isEmpty(viewValue) ||
-              viewValue === password);
-            return viewValue;
-          };
-          ngModel.$parsers.push(validate);
-          scope.$watch(attrs.confirmPassword, function () {
-            validate(ngModel.$viewValue);
-          });
-        }
-      };
-    }
-  );
+      function () {
+        return {
+          restrict: 'A',
+          require: 'ngModel',
+          link: function (scope, element, attrs, ngModel) {
+            var validate = function (viewValue) {
+              var password = scope.$eval(attrs.confirmPassword);
+              ngModel.$setValidity('match', ngModel.$isEmpty(viewValue) ||
+                viewValue === password);
+              return viewValue;
+            };
+            ngModel.$parsers.push(validate);
+            scope.$watch(attrs.confirmPassword, function () {
+              validate(ngModel.$viewValue);
+            });
+          }
+        };
+      }
+    );
 
 })();
