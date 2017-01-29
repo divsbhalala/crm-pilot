@@ -3,6 +3,7 @@ var _ = require("lodash");
 module.exports = function (user) {
 
   user.validatesUniquenessOf('email');
+  user.validatesLengthOf('password', {min: 8, message: {min: 'Password is too short'}});
   // Set the username to the users email address by default.
   user.observe('before save', function setDefaultUsername(ctx, next) {
     if (ctx.instance) {
