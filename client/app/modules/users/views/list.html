@@ -2,8 +2,8 @@
   <div class="panel-heading">
     <span class="">
     <input class="form-control" autofocus="autofocus" style="max-width: 15em; display: inline-block;"
-           ng-model="searchText" placeholder="search..." ng-keyup="getUsers()">
-      <label>{{(ctrl.totalUser).length}} users found</label>
+           ng-model="ctrl.searchText" placeholder="search..." ng-keyup="ctrl.searchUser()">
+      <label>{{ctrl.totalUsers.count}} users found</label>
     </span>
     <span class="pull-right btn-group">
       <a href="" class="btn btn-xs btn-success" ui-sref="^.add()">
@@ -13,7 +13,7 @@
   </div>
 
   <div class='list-group'>
-    <div ng-repeat="user in ctrl.users | filter:searchText | orderBy: 'email'" class="list-group-item col-md-12">
+    <div ng-repeat="user in ctrl.users  | orderBy: 'email'" class="list-group-item col-md-12">
       <span class="pull-right btn-group">
         <a class="btn btn-xs btn-default" ui-sref="app.users.edit({ id: user.id })">
           <i class="fa fa-pencil"></i>
@@ -45,7 +45,7 @@
       </div>
     </div>
     <div class="list-group-item col-md-12">
-      <div class="pull-left col-md-4">Record {{ ctrl.offset-ctrl.limit}} to {{ctrl.offset}} of {{ctrl.totalUsers.count}}</div>
+      <div class="pull-left col-md-4">Record {{ ctrl.offset}} to {{ctrl.offset+ ctrl.limit > ctrl.totalUsers.count ? ctrl.totalUsers.count : ctrl.offset+ ctrl.limit}} of {{ctrl.totalUsers.count}}</div>
 
       <div class="input-group pull-right col-md-3">
         <div class="input-group-btn">
@@ -57,7 +57,7 @@
         </div>
         <div class="input-group-btn">
           <button class="btn btn-primary" type="button" ng-disabled="ctrl.currentPage > ctrl.totalPage" ng-click="ctrl.getGoUser()">Go</button>
-          <button class="btn btn-default" type="button" ng-disabled="ctrl.currentPage == ctrl.totalPage" ng-click="ctrl.getUsers()">Next&gt;&gt;</button>
+          <button class="btn btn-default" type="button" ng-disabled="ctrl.currentPage == ctrl.totalPage" ng-click="ctrl.getNextUsers()">Next&gt;&gt;</button>
         </div>
       </div>
     </div>

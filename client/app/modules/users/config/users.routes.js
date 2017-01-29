@@ -30,18 +30,28 @@
             self.limit=2;
             self.offset=0;
             self.totalUser=0;
+            self.searchText='';
             var countByWhere= function(where){
               return UserService.count(where).then(function(data){
                 self.totalUsers=data;
               });
             };
             var getUsers= function(){
+              console.log(self.searchText);
+
               if(self.searchText){
+                countByWhere({"where":{ "$text": { "search": self.searchText } }});
                 return UserService.findByWhere({"where":{ "$text": { "search": self.searchText } }});
               }
               else{
+                self.totalUsers= totalUsers;
                 return UserService.find();
               }
+            };
+            self.searchUser= function(){
+              self.offset=0;
+              self.totalUser=0;
+              self.getUsers();
             };
             self.totalPage=Math.ceil(self.totalUsers.count/self.limit);
             self.getUsers= function(){
@@ -49,8 +59,8 @@
               self.currentPage = self.currentPage <= self.totalPage ? self.currentPage: self.totalPage;
               getUsers().then(function(data){
                 self.totalUser=data;
+                self.totalUsers.count=data.length;
                 self.users=data.splice(self.offset, self.limit);
-                self.offset+=self.limit;
                 self.currentPage=Math.ceil(self.offset/self.limit);
               })
             };
@@ -63,7 +73,11 @@
               self.offset-=self.limit;
               self.offset-=self.limit;
               self.getUsers();
-            }
+            };
+            self.getNextUsers=function(){
+              self.offset+=self.limit;
+              self.getUsers();
+            };
 
           },
           resolve: {
