@@ -8,10 +8,8 @@
     "connector": "transient"
   },
   "mongoDb": {
-    "host": "localhost",
-    "database": "crm",
-    "password": "",
     "name": "mongoDb",
-    "connector": "mongodb"
+    "connector": "loopback-connector-mongodb",
+    "url":"mongodb://dsbhalala:sweetrox5288@ds057214.mlab.com:57214/crm"
   }
 }
