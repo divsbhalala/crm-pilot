@@ -94,8 +94,7 @@
               },
               msgs: {
                 required: gettextCatalog.getString('You need an email address'),
-                email: gettextCatalog.getString('Email address needs to be valid'),
-                valid: gettextCatalog.getString('Nice email address!')
+                email: gettextCatalog.getString('Email address needs to be valid')
               }
             }
           },
@@ -129,8 +128,8 @@
                 required: true
               },
               msgs: {
-                minlength: gettextCatalog.getString(
-                  'Needs to have at least 8 characters')
+                required: gettextCatalog.getString('You need an password'),
+                minlength: gettextCatalog.getString('Needs to have at least 8 characters')
               }
             }
           });

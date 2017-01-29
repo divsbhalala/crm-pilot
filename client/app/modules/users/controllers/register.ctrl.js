@@ -72,7 +72,8 @@
           ngMinlength: 8
         },
         msgs: {
-          required: gettextCatalog.getString('You need an password')
+          required: gettextCatalog.getString('You need an password'),
+          minlength: gettextCatalog.getString('Needs to have at least 8 characters')
         }
       }];
 
