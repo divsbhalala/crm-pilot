@@ -29,18 +29,18 @@
         </div>
         <div>
           <span>Email:</span>
-          <label><a class="text-muted" editable-text="user.email">{{user.email}}</a></label>
+          <label><a class="text-muted" editable-text="user.email" onaftersave="ctrl.updateUser(user, user.id)">{{user.email}}</a></label>
         </div>
       </div>
 
       <div class="col-md-6">
         <div>
           <span>First Name:</span>
-          <label><a class="text-muted" editable-text="user.firstName">{{user.firstName}}</a></label>
+          <label><a class="text-muted" editable-text="user.firstName" onaftersave="ctrl.updateUser(user, user.id)">{{user.firstName}}</a></label>
         </div>
         <div>
           <span>Last Name:</span>
-          <label><a class="text-muted" editable-text="user.lastName">{{user.lastName}}</a></label>
+          <label><a class="text-muted" editable-text="user.lastName" onaftersave="ctrl.updateUser(user, user.id)">{{user.lastName}}</a></label>
         </div>
       </div>
     </div>

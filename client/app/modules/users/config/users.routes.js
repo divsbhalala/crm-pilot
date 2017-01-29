@@ -78,6 +78,9 @@
               self.offset+=self.limit;
               self.getUsers();
             };
+            self.updateUser= function(user, id) {
+              UserService.updateAttributes(id,user);
+            }
 
           },
           resolve: {
