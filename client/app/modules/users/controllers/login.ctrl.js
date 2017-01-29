@@ -20,11 +20,6 @@
         rememberMe: true
       };
 
-      if (CoreService.env.name === 'development') {
-        $scope.credentials.email = 'admin@admin.com';
-        $scope.credentials.password = 'admin';
-      }
-
       $scope.schema = [
         {
           label: '',
@@ -37,8 +32,7 @@
           },
           msgs: {
             required: gettextCatalog.getString('You need an email address'),
-            email: gettextCatalog.getString('Email address needs to be valid'),
-            valid: gettextCatalog.getString('Nice email address!')
+            email: gettextCatalog.getString('Email address needs to be valid')
           }
         },
         {
@@ -47,7 +41,8 @@
           placeholder: gettextCatalog.getString('Password'),
           type: 'password',
           attr: {
-            required: true
+            required: true,
+            ngMinlength: 8
           }
         },
         {
@@ -60,7 +55,7 @@
       $scope.options = {
         validation: {
           enabled: true,
-          showMessages: false
+          showMessages: true
         },
         layout: {
           type: 'basic',
@@ -89,11 +84,6 @@
             rememberMe: $scope.credentials.rememberMe
           }, $scope.credentials,
           function (user) {
-
-            console.log(user.id); // => acess token
-            console.log(user.ttl); // => 1209600 time to live
-            console.log(user.created); // => 2013-12-20T21:10:20.377Z
-            console.log(user.userId); // => 1
 
             var next = $location.nextAfterLogin || '/';
             $location.nextAfterLogin = null;

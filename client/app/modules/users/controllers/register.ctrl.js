@@ -59,8 +59,7 @@
         },
         msgs: {
           required: gettextCatalog.getString('You need an email address'),
-          email: gettextCatalog.getString('Email address needs to be valid'),
-          valid: gettextCatalog.getString('Nice email address!')
+          email: gettextCatalog.getString('Email address needs to be valid')
         }
       },
       {
@@ -80,7 +79,7 @@
       $scope.options = {
         validation: {
           enabled: true,
-          showMessages: false
+          showMessages: true
         },
         layout: {
           type: 'basic',
