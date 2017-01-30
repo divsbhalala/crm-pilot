@@ -37,19 +37,25 @@
           }
         );
       };
-      this.updateAttributes = function (id, user) {
+      this.updateAttributes = function (id, user, successCb, cancelCb) {
         return User.prototype$updateAttributes({id: id}, user).$promise
-          .then(function () {
+          .then(function (data) {
             CoreService.toastSuccess(
               gettextCatalog.getString('User saved'),
               gettextCatalog.getString('Your user is safe with us!')
             );
+            if(successCb){
+              successCb(data)
+            }
           })
           .catch(function (err) {
             CoreService.toastError(
               gettextCatalog.getString('Error saving user '),
               gettextCatalog.getString('This user could no be saved: ' + err)
             );
+            if(cancelCb){
+              cancelCb(err)
+            }
           }
         );
       };

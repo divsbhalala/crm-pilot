@@ -13,7 +13,7 @@
   </div>
 
   <div class='list-group'>
-    <div ng-repeat="user in ctrl.users  | orderBy: 'email'" class="list-group-item col-md-12">
+    <div ng-repeat="user in ctrl.users track by $index  | orderBy: 'email'" class="list-group-item col-md-12">
       <span class="pull-right btn-group">
         <a class="btn btn-xs btn-default" ui-sref="app.users.edit({ id: user.id })">
           <i class="fa fa-pencil"></i>
@@ -29,18 +29,18 @@
         </div>
         <div>
           <span>Email:</span>
-          <label><a class="text-muted" editable-text="user.email" onaftersave="ctrl.updateUser(user, user.id)">{{user.email}}</a></label>
+          <label><a class="text-muted" editable-text="user.email" onaftersave="ctrl.updateUser(user, $index)">{{user.email}}</a></label>
         </div>
       </div>
 
       <div class="col-md-6">
         <div>
           <span>First Name:</span>
-          <label><a class="text-muted" editable-text="user.firstName" onaftersave="ctrl.updateUser(user, user.id)">{{user.firstName}}</a></label>
+          <label><a class="text-muted" editable-text="user.firstName" onaftersave="ctrl.updateUser(user, $index)">{{user.firstName || '-'}}</a></label>
         </div>
         <div>
           <span>Last Name:</span>
-          <label><a class="text-muted" editable-text="user.lastName" onaftersave="ctrl.updateUser(user, user.id)">{{user.lastName}}</a></label>
+          <label><a class="text-muted" editable-text="user.lastName" onaftersave="ctrl.updateUser(user, $index)">{{user.lastName || '-' }}</a></label>
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@
                  ng-model="ctrl.currentPage">
         </div>
         <div class="input-group-btn">
-          <button class="btn btn-primary" type="button" ng-disabled="ctrl.currentPage > ctrl.totalPage" ng-click="ctrl.getGoUser()">Go</button>
+          <button class="btn btn-primary" type="button" ng-disabled="ctrl.currentPage <=0 ||ctrl.currentPage >= ctrl.totalPage || ctrl.currentPage*ctrl.limit >= ctrl.totalUsers.count" ng-click="ctrl.getGoUser()">Go</button>
           <button class="btn btn-default" type="button" ng-disabled="ctrl.currentPage == ctrl.totalPage" ng-click="ctrl.getNextUsers()">Next&gt;&gt;</button>
         </div>
       </div>

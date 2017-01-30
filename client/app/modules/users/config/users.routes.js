@@ -23,12 +23,11 @@
           url: '',
           templateUrl: 'modules/users/views/list.html',
           controllerAs: 'ctrl',
-          controller: function (users, totalUsers, UserService) {
-            console.log('users', users, UserService);
+          controller: function (users, totalUsers, UserService, $scope) {
             var self=this;
             self.totalUsers= totalUsers;
-            self.limit=2;
-            self.offset=0;
+            self.limit=10;
+            self.offset=1;
             self.totalUser=0;
             self.searchText='';
             var countByWhere= function(where){
@@ -49,28 +48,39 @@
               }
             };
             self.searchUser= function(){
-              self.offset=0;
+              self.offset=1;
               self.totalUser=0;
               self.getUsers();
             };
             self.totalPage=Math.ceil(self.totalUsers.count/self.limit);
+            self.currentPage=1;
             self.getUsers= function(){
 
               self.currentPage = self.currentPage <= self.totalPage ? self.currentPage: self.totalPage;
               getUsers().then(function(data){
                 self.totalUser=data;
                 self.totalUsers.count=data.length;
-                self.users=data.splice(self.offset, self.limit);
-                self.currentPage=Math.ceil(self.offset/self.limit);
+                self.users=data.splice(self.offset-1, self.limit);
+                self.currentPage=Math.ceil(self.offset/self.limit) <= 0 ? 1 :Math.ceil(self.offset/self.limit);
               })
             };
             self.getUsers();
             self.getGoUser=function(){
-              self.offset=self.limit*self.currentPage;
-              self.getUsers();
+              if( self.currentPage >= self.totalPage){
+                self.currentPage=self.totalPage;
+              }
+              else if(self.currentPage <=1){
+                self.currentPage=1;
+              }
+              if(!self.currentPage || self.limit*self.currentPage <=self.totalUsers.count){
+                return false;
+              }
+              else{
+                self.offset=self.limit*self.currentPage;
+                self.getUsers();
+              }
             };
             self.getPrevUsers=function(){
-              self.offset-=self.limit;
               self.offset-=self.limit;
               self.getUsers();
             };
@@ -78,8 +88,10 @@
               self.offset+=self.limit;
               self.getUsers();
             };
-            self.updateUser= function(user, id) {
-              UserService.updateAttributes(id,user);
+            self.updateUser= function(user, index) {
+              UserService.updateAttributes(user.id,user, function(data){
+                self.users[index]=data;
+              });
             }
 
           },
