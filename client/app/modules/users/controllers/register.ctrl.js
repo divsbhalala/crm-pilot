@@ -11,8 +11,11 @@
    **/
   angular
     .module('com.module.users')
-    .controller('RegisterCtrl', function ($scope, $routeParams, $location, $filter, CoreService, User, AppAuth, gettextCatalog) {
+    .controller('RegisterCtrl', function ($scope, $routeParams, $location, $filter, CoreService, User, AppAuth, gettextCatalog, $state) {
 
+      if(User.getCurrent()){
+        $state.go('app.users.list');
+      }
       $scope.registration = {
         firstName: '',
         lastName: '',

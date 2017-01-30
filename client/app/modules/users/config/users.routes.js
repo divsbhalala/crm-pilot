@@ -23,7 +23,7 @@
           url: '',
           templateUrl: 'modules/users/views/list.html',
           controllerAs: 'ctrl',
-          controller: function (users, totalUsers, UserService, $scope) {
+          controller: function (users, totalUsers, UserService) {
             var self=this;
             self.totalUsers= totalUsers;
             self.limit=10;
@@ -39,8 +39,8 @@
               console.log(self.searchText);
 
               if(self.searchText){
-                countByWhere({"where":{ "$text": { "search": self.searchText } }});
-                return UserService.findByWhere({"where":{ "$text": { "search": self.searchText } }});
+                countByWhere({'where':{ '$text': { 'search': self.searchText } }});
+                return UserService.findByWhere({'where':{ '$text': { 'search': self.searchText } }});
               }
               else{
                 self.totalUsers= totalUsers;

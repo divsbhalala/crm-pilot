@@ -11,10 +11,12 @@
    **/
   angular
     .module('com.module.users')
-    .controller('LoginCtrl', function ($scope, $routeParams, $location, CoreService, User, AppAuth, AuthProvider, gettextCatalog) {
+    .controller('LoginCtrl', function ($scope, $routeParams, $location, CoreService, User, AppAuth, AuthProvider, gettextCatalog, $state) {
 
       var TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
-
+      if(User.getCurrent()){
+        $state.go('app.users.list');
+      }
       $scope.credentials = {
         ttl: TWO_WEEKS,
         rememberMe: true

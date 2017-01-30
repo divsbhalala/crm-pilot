@@ -12,8 +12,11 @@
    **/
   angular
     .module('com.module.core')
-    .controller('RouteCtrl', function (ApiService, AppAuth, $location) {
+    .controller('RouteCtrl', function (ApiService, AppAuth, $location, User, $state) {
 
+      if(User.getCurrent()){
+        $state.go('app.users.list');
+      }
       ApiService.checkConnection()
         .then(function () {
           console.log('ApiService.checkConnection success');

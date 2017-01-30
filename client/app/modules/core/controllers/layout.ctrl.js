@@ -47,7 +47,7 @@
           'class': 'skin-blue'
         }
       ];
-      $scope.appLayout = '';
+      $scope.appLayout = 'not-fixed';
       $scope.appLayouts = [
         {
           'name': 'Fixed',

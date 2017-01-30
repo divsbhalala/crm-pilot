@@ -129,6 +129,7 @@
               label: gettextCatalog.getString('Password'),
               placeholder: 'Enter password',
               required: true,
+              type: 'password',
               attr: {
                 ngMinlength: 8,
                 required: true

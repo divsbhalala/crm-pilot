@@ -103,7 +103,9 @@
       gettextCatalog.setCurrentLanguage($rootScope.locale.lang);
 
     })
-    .run(function (formlyConfig) {
+    .run(function (formlyConfig, formlyValidationMessages) {
+
+      formlyValidationMessages.addStringMessage('required', 'This field is required');
       /*
        ngModelAttrs stuff
        */
