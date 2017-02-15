@@ -537,7 +537,7 @@ module.exports = function (grunt) {
         options: {
           input: 'server/server.js',
           output: '<%= yeoman.app %>/js/lb-services.js',
-          apiUrl: '<%= yeoman.api.production %>'
+          apiUrl: '<%= yeoman.api.development %>'
         }
       }
     },
