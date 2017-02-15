@@ -2,6 +2,6 @@
 
  angular.module('config', [])
 
-.constant('ENV', {name:'development',apiUrl:'http://0.0.0.0:3000/api/',siteUrl:'http://0.0.0.0:3000'})
+.constant('ENV', {name:'development',apiUrl:'http://0.0.0.0:3333/api/',siteUrl:'http://0.0.0.0:3333'})
 
 ;
