@@ -21,14 +21,14 @@ module.exports = function (grunt) {
     test: require('./bower.json').appPath || 'client/test',
     dist: 'dist',
     api: {
-      development: 'http://0.0.0.0:3333/api/',
+      development: 'http://67.205.172.80:3333/api/',
       production: '/api/'
     },
     site: {
-      development: 'http://0.0.0.0:3333',
+      development: 'http://67.205.172.80:3333',
       production: ''
     },
-    host: '0.0.0.0'
+    host: '67.205.172.80'
   };
 
   // Define the configuration for all the tasks
@@ -148,7 +148,7 @@ module.exports = function (grunt) {
     connect: {
       options: {
         port: 9000,
-        // Change this to '0.0.0.0' to access the server from outside.
+        // Change this to '67.205.172.80' to access the server from outside.
         hostname: '<%= yeoman.host %>',
         livereload: 35729
       },
