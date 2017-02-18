@@ -95,6 +95,9 @@
               self.getUsers();
             };
             self.updateUser= function(user, index) {
+              if(!self.validEmail || !self.validEmail || self.isExists || !self.validUsername  || self.isUsernameExists || !self.validFirstName || !self.validLastName){
+                return false;
+              }
               UserService.updateAttributes(user.id,user, function(data){
                 self.users[index]=data;
               });
