@@ -19,6 +19,11 @@
       "required": true,
       "index": true
     },
+    "username": {
+      "type": "string",
+      "required": true,
+      "index": true
+    },
     "active": {
       "type": "boolean",
       "default": true

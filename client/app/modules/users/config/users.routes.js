@@ -30,6 +30,12 @@
             self.offset=1;
             self.totalUser=0;
             self.searchText='';
+            self.validEmail=true;
+            self.isExists=false;
+            self.validUsername=true;
+            self.validFirstName=true;
+            self.validLastName=true;
+            self.isUsernameExists=false;
             var countByWhere= function(where){
               return UserService.count(where).then(function(data){
                 self.totalUsers=data;
@@ -92,7 +98,51 @@
               UserService.updateAttributes(user.id,user, function(data){
                 self.users[index]=data;
               });
-            }
+            };
+
+            self.checkEmailExists = function(data, user, $index){
+              if(!data){
+                self.validEmail=false;
+                return false;
+              }
+              self.validEmail=true;
+              UserService.findByWhere({'where':{email: data , 'id': { 'neq': user.id } }}).then(function(data){
+                delete data.$promise;
+                self.isExists=data.length;
+              })
+            };
+            self.checkUsernameExists = function(data, user, $index){
+              if(!data){
+                self.validUsername=false;
+                return false;
+              }
+              self.validUsername=true;
+              UserService.findByWhere({'where':{username: data , 'id': { 'neq': user.id } }}).then(function(data){
+                delete data.$promise;
+                self.isUsernameExists=data.length;
+              })
+            };
+
+            self.checkFirstName = function(data){
+              if(!data){
+                self.validFirstName=false;
+                return false;
+              }
+              self.validFirstName=true;
+            };
+            self.checkLastName = function(data){
+              if(!data){
+                self.validLastName=false;
+                return false;
+              }
+              self.validLastName=true;
+
+            };
+            self.checkFields = function(data, fieldName) {
+              if (!data) {
+                return fieldName+" should be required";
+              }
+            };
 
           },
           resolve: {

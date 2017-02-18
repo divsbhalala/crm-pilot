@@ -7,6 +7,7 @@
       this.find = function () {
         return User.find().$promise;
       };
+
       this.findByWhere = function (where) {
         return User.find({filter: where}).$promise;
       };
@@ -101,6 +102,62 @@
               msgs: {
                 required: gettextCatalog.getString('You need an email address'),
                 email: gettextCatalog.getString('Email address needs to be valid')
+              }
+            },
+            validators: {
+              // Custom validator to check whether the driver's license
+              // number that the user enters is valid or not
+              unique: function($viewValue, $modelValue, scope) {
+                var value = $modelValue || $viewValue;
+                if(value ) {
+                  var condition={filter: {'where':{email: value}}};
+                  if(scope.model.id){
+                    condition={filter: {'where':{email: value, 'id': { 'neq': scope.model.id }}}};
+                  }
+                  return User.find(condition).$promise.then(function(data){
+                    //return data.length ? false : true;
+                    if(data.length){
+                      throw 'Email already exists'
+                    }
+                  });
+                }
+              }
+            }
+          },
+          {
+            key: 'username',
+            type: 'input',
+            templateOptions: {
+              label: gettextCatalog.getString('Username'),
+              required: true,
+              type: 'input',
+              placeholder: 'Enter Username',
+              attr: {
+                required: true,
+                ngMinlength: 4
+              },
+              msgs: {
+                required: gettextCatalog.getString('You need an username')
+              }
+            },
+            validators: {
+              // Custom validator to check whether the driver's license
+              // number that the user enters is valid or not
+              unique: function($viewValue, $modelValue, scope) {
+                var value = $modelValue || $viewValue;
+                //return false;
+                if(value ) {
+                  var condition={filter: {'where':{email: value}}};
+                  if(scope.model.id){
+                    condition={filter: {'where':{email: value, 'id': { 'neq': scope.model.id }}}};
+                  }
+                  return User.find(condition).$promise.then(function(data){
+                    //return data.length ? false : true;
+                    if(data.length && formType ==='add'){
+                      throw 'username already exists'
+                    }
+                  });
+                }
               }
             }
           },

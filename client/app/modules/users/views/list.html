@@ -27,20 +27,31 @@
           <span>Display Name:</span>
           <label>{{ user.display_name || user.firstName +' ' + user.lastName}}</label>
         </div>
-        <div>
+        <div class="{{ !ctrl.validEmail || ctrl.isExists ? 'has-error': ''}} ">
           <span>Email:</span>
-          <label><a class="text-muted" editable-text="user.email" onaftersave="ctrl.updateUser(user, $index)">{{user.email}}</a></label>
+          <label><a class="text-muted" editable-email="user.email"  e-required buttons=" {{ ctrl.validEmail || !ctrl.isExists ? 'no': 'yes'}" e-ng-change="ctrl.checkEmailExists($data, user,  $index)"  onaftersave="ctrl.updateUser(user, $index)" onbeforesave="ctrl.checkFields($data, 'Email')">{{user.email || 'empty'}}</a></label>
+          <!--<div class="editable-error error-cst text-danger help-block " ng-if="!ctrl.validEmail">Invalid Email Address</div>
+
+          <span class="col-md-12 error-cst text-danger" ng-if="ctrl.isExists">Email Already Exists</span>-->
+        </div>
+
+        <div class="{{ !ctrl.validUsername || ctrl.isUsernameExists ? 'has-error': ''}} ">
+          <span>Username:</span>
+          <label><a class="text-muted" editable-text="user.username"  e-required   onaftersave="ctrl.updateUser(user, $index)" e-ng-change="ctrl.checkUsernameExists($data, user,  $index)"  onbeforesave="ctrl.checkFields($data, 'Username')">{{user.username || 'empty'}}</a></label>
+          <!--<div class="editable-error error-cst text-danger help-block " ng-if="!ctrl.validUsername">Invalid Username</div>
+
+          <span class="col-md-12 error-cst text-danger" ng-if="ctrl.isUsernameExists">Username Already Exists</span>-->
         </div>
       </div>
 
       <div class="col-md-6">
-        <div>
+        <div class="{{ !ctrl.validFirstName  ? 'has-error': ''}} ">
           <span>First Name:</span>
-          <label><a class="text-muted" editable-text="user.firstName" onaftersave="ctrl.updateUser(user, $index)">{{user.firstName || '-'}}</a></label>
+          <label><a class="text-muted" editable-text="user.firstName"  e-required  onaftersave="ctrl.updateUser(user, $index)" e-ng-change="ctrl.checkFirstName($data)" onbeforesave="ctrl.checkFields($data, 'FirstName')">{{user.firstName || 'empty'}}</a></label>
         </div>
-        <div>
+        <div class="{{ !ctrl.validLastName  ? 'has-error': ''}} ">
           <span>Last Name:</span>
-          <label><a class="text-muted" editable-text="user.lastName" onaftersave="ctrl.updateUser(user, $index)">{{user.lastName || '-' }}</a></label>
+          <label><a class="text-muted" editable-text="user.lastName"  e-required onaftersave="ctrl.updateUser(user, $index)" e-ng-change="ctrl.checkLastName($data)" onbeforesave="ctrl.checkFields($data, 'LastName')">{{user.lastName || 'emptry' }}</a></label>
         </div>
       </div>
     </div>

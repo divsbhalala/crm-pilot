@@ -49,3 +49,11 @@
 .nav-tabs > li > a, .nav-tabs > li > a:hover {
   cursor: pointer;
 }
+.error-cst{
+  display: none;}
+.has-error .error-cst{
+  display: block;
+}
+.has-error .form-control:focus{
+  border-color: #843534 !important;
+}
